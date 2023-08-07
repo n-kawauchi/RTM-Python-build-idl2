@@ -13,6 +13,27 @@ import setuptools
 import shutil
 import subprocess
 
+baseidl_files = [
+    "BasicDataType.idl",
+    "DataPort.idl",
+    "ExtendedDataTypes.idl",
+    "InterfaceDataTypes.idl",
+    "Manager.idl",
+    "OpenRTM.idl",
+    "RTC.idl",
+    "SDOPackage.idl",
+    "SharedMemory.idl",
+    "IORProfile.idl",
+    "../ext/sdo/observer/ComponentObserver_OpenRTM.idl",
+    "ExtendedFsmService.idl",
+    "DataPort_OpenRTM.idl",
+    "CSPPort.idl",
+    "../ext/fsm4rtc_observer/ComponentObserver.idl",
+    "ext/rtmCamera/CameraCommonInterface.idl",
+    "ext/rtmManipulator/ManipulatorCommonInterface_Common.idl",
+    "ext/rtmManipulator/ManipulatorCommonInterface_DataTypes.idl",
+    "ext/rtmManipulator/ManipulatorCommonInterface_Middle.idl"
+]
 
 class BuildIDL(Command):
     description = 'generate Python stubs from the IDL files'
@@ -88,6 +109,15 @@ class BuildIDL(Command):
         idl_target_dir = os.path.join(self.idl_src_dir, '../ext/fsm4rtc_observer')
         self.set_idl_list(idl_target_dir)
 
+    def compile_idl3(self):
+        log.info('***Generating Python stubs from IDL files')
+        self.mkpath(self.stubs_dir)
+        idl_files = [os.path.join(self.idl_src_dir, f) for f in baseidl_files]
+        for f in idl_files:
+            log.info('*** compile_idl3 : {}'.format(f))
+            self.compile_one_idl(f)
+
+    
     def compile_idl2(self):
         log.info('***Generating Python stubs from IDL files')
         self.mkpath(self.stubs_dir)
