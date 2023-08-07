@@ -58,6 +58,13 @@ class BuildIDL(Command):
             log.info('*** set_idl_list : {}'.format(f))
             self.compile_one_idl(f)
     
+    def set_idl_list2(self, list_dir):
+        idl_files = [os.path.join(list_dir, f)
+                     for f in os.listdir(list_dir)
+                     if os.path.splitext(f)[1] == '.idl']
+        for f in idl_files:
+            log.info('*** set_idl_list2 : {}'.format(f))
+            self.compile_one_idl(f)
 
     def compile_idl(self):
         log.info('Generating Python stubs from IDL files')
@@ -79,6 +86,32 @@ class BuildIDL(Command):
         # ../ext/fsm4rtc_observer
         idl_target_dir = os.path.join(self.idl_src_dir, '../ext/fsm4rtc_observer')
         self.set_idl_list(idl_target_dir)
+
+    def compile_idl2(self):
+        log.info('***Generating Python stubs from IDL files')
+        self.mkpath(self.stubs_dir)
+        #self.set_idl_list(self.idl_src_dir)
+
+        # ext/rtmCamera
+        #idl_target_dir = os.path.join(self.idl_src_dir, 'ext/rtmCamera')
+        os.path.join(self.idl_src_dir, 'ext/rtmCamera')
+        #self.set_idl_list(idl_target_dir)
+
+        # ext/rtmManipulator
+        #idl_target_dir = os.path.join(self.idl_src_dir, 'ext/rtmManipulator')
+        os.path.join(self.idl_src_dir, 'ext/rtmManipulator')
+        #self.set_idl_list(idl_target_dir)
+        
+        # ../ext/sdo/observer
+        #idl_target_dir = os.path.join(self.idl_src_dir, '../ext/sdo/observer')
+        os.path.join(self.idl_src_dir, '../ext/sdo/observer')
+        #self.set_idl_list(idl_target_dir)
+
+        # ../ext/fsm4rtc_observer
+        #idl_target_dir = os.path.join(self.idl_src_dir, '../ext/fsm4rtc_observer')
+        os.path.join(self.idl_src_dir, '../ext/fsm4rtc_observer')
+        self.set_idl_list2(self.idl_src_dir)
+        #self.set_idl_list(idl_target_dir)
 
     def move_stubs(self):
         stub_dest = os.path.join(self.build_lib, 'OpenRTM_aist', 'RTM_IDL')
