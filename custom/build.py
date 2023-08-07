@@ -202,7 +202,7 @@ class BuildIDL(Command):
 
     def run(self):
         #self.compile_idl()
-        self.compile_idl2()
+        self.compile_idl3()
         self.move_stubs()
         self.copy_idl()
         self.examples_idl()
