@@ -95,25 +95,21 @@ class BuildIDL(Command):
 
         # ext/rtmCamera
         idl_target_dir = os.path.join(self.idl_src_dir, 'ext/rtmCamera')
-        os.path.join(self.idl_src_dir, 'ext/rtmCamera')
         ret_list = self.set_idl_list2(idl_target_dir)
         idl_list.append(ret_list)
 
         # ext/rtmManipulator
         idl_target_dir = os.path.join(self.idl_src_dir, 'ext/rtmManipulator')
-        os.path.join(self.idl_src_dir, 'ext/rtmManipulator')
         ret_list = self.set_idl_list2(idl_target_dir)
         idl_list.append(ret_list)
         
         # ../ext/sdo/observer
         idl_target_dir = os.path.join(self.idl_src_dir, '../ext/sdo/observer')
-        os.path.join(self.idl_src_dir, '../ext/sdo/observer')
         ret_list = self.set_idl_list2(idl_target_dir)
         idl_list.append(ret_list)
         
         # ../ext/fsm4rtc_observer
         idl_target_dir = os.path.join(self.idl_src_dir, '../ext/fsm4rtc_observer')
-        os.path.join(self.idl_src_dir, '../ext/fsm4rtc_observer')
         ret_list = self.set_idl_list2(self.idl_src_dir)
         idl_list.append(ret_list)
         for f in idl_list:
