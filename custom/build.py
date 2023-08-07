@@ -168,7 +168,8 @@ class BuildIDL(Command):
 
 
     def run(self):
-        self.compile_idl()
+        #self.compile_idl()
+        self.compile_idl2()
         self.move_stubs()
         self.copy_idl()
         self.examples_idl()
