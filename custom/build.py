@@ -5,8 +5,6 @@
 from setuptools import Command 
 from setuptools._distutils import errors 
 from setuptools._distutils import log
-from setuptools._distutils import util
-from setuptools._distutils import cmd
 import os
 import os.path
 import setuptools
@@ -37,7 +35,6 @@ baseidl_files = [
 
 class BuildIDL(Command):
     description = 'generate Python stubs from the IDL files'
-
 
     def initialize_options(self):
         self.omniidl = None
@@ -76,7 +73,6 @@ class BuildIDL(Command):
         self.mkpath(self.stubs_dir)
         idl_files = [os.path.join(self.idl_src_dir, f) for f in baseidl_files]
         for f in idl_files:
-            log.info('*** compile_idl3 : {}'.format(f))
             self.compile_one_idl(f)
 
     def move_stubs(self):
@@ -96,6 +92,7 @@ class BuildIDL(Command):
 
     def compile_example_idl(self, idl_f, pkg_param, current_dir):
         outdir_param = '-C' + current_dir 
+        #idl_path_param = '-IOpenRTM_aist/RTM_IDL ' + idl_f
         idl_path_param = '-IOpenRTM_aist/RTM_IDL ' + idl_f
         p = subprocess.Popen([self.omniidl, '-bpython', idl_path_param,
                               outdir_param, pkg_param, idl_f],
