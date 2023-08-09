@@ -74,7 +74,7 @@ class BuildIDL(Command):
         pkg_param = '-Wbpackage=OpenRTM_aist.RTM_IDL'
         idl_files = [os.path.join(self.idl_src_dir, f) for f in baseidl_files]
         for f in idl_files:
-            self.compile_one_idl(f, self.stubs_dir)
+            self.compile_one_idl(f, pkg_param, self.stubs_dir)
 
     def move_stubs(self):
         stub_dest = os.path.join(self.build_lib, 'OpenRTM_aist', 'RTM_IDL')
