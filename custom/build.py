@@ -91,34 +91,19 @@ class BuildIDL(Command):
         for f in idl_files:
             shutil.copy(f, self.idl_dir)
 
-    def compile_example_idl(self, idl_f, pkg_param, current_dir):
-        outdir_param = '-C' + current_dir 
-        #idl_path_param = '-IOpenRTM_aist/RTM_IDL ' + idl_f
-        idl_path_param = '-I' + 'OpenRTM_aist/RTM_IDL'
-        p = subprocess.Popen([self.omniidl, '-bpython', idl_path_param,
-                              outdir_param, pkg_param, idl_f],
-                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        stdout, stderr = p.communicate()
-        if p.returncode != 0:
-            raise errors.DistutilsExecError(
-                'Failed to compile IDL file {}\nStdout:\n{}\n---\nStderr:\n'
-                '{}'.format(idl_f, stdout, stderr))
-
-    def examples_idl(self):
+    def compile_examples_idl(self):
         log.info('Generating Python stubs from examples IDL files')
         #../examples/SimpleService
         self.mkpath(self.examples_dir)
         current_dir = os.path.join(self.examples_dir, 'SimpleService')
         idl_file = os.path.join(current_dir, "MyService.idl")
         pkg_param = '-Wbpackages=OpenRTM_aist.examples.SimpleService'
-        #self.compile_example_idl(idl_file, pkg_param, current_dir)
         self.compile_one_idl(idl_file, pkg_param, current_dir)
 
         #../examples/AutoTest
         current_dir = os.path.join(self.examples_dir, 'AutoTest')
         idl_file = os.path.join(current_dir, "AutoTestService.idl")
         pkg_param = '-Wbpackages=OpenRTM_aist.examples.AutoTest'
-        #self.compile_example_idl(idl_file, pkg_param, current_dir)
         self.compile_one_idl(idl_file, pkg_param, current_dir)
 
     def copy_examples_idl(self):
@@ -135,6 +120,6 @@ class BuildIDL(Command):
         self.compile_idl()
         self.move_stubs()
         self.copy_idl()
-        self.examples_idl()
+        self.compile_examples_idl()
         self.copy_examples_idl()
 
