@@ -93,7 +93,7 @@ class BuildIDL(Command):
     def compile_example_idl(self, idl_f, pkg_param, current_dir):
         outdir_param = '-C' + current_dir 
         #idl_path_param = '-IOpenRTM_aist/RTM_IDL ' + idl_f
-        idl_path_param = '-IOpenRTM_aist/RTM_IDL ' + idl_f
+        idl_path_param = '-I' + 'OpenRTM_aist/RTM_IDL'
         p = subprocess.Popen([self.omniidl, '-bpython', idl_path_param,
                               outdir_param, pkg_param, idl_f],
                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
